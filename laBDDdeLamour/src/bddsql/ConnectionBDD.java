@@ -48,16 +48,50 @@ public class ConnectionBDD {
     }
     
     public boolean connect(){
-        
+    // si on a jamais été connecté on se connecte, sinon refresh la connection    
         if(this.cn == null){
         
             try {
+                
                 this.cn = DriverManager.getConnection(ConnectionBDD.DB_URL, ConnectionBDD.DB_USER, ConnectionBDD.DB_PASSWORD);
+            
             } catch (SQLException ex) {
-                Logger.getLogger(ConnectionBDD.class.getName()).log(Level.SEVERE, null, ex);
+                
+                return false;
+                
             }
+        }
+        else{
+            
+            try {
+            
+                Statement st = this.cn.createStatement();
+                String requete ="SELECT 1";
+                st.executeQuery(requete);
+            //si ici ca ne marche pas c'est quon est  plus connecté, alors on se reconnecte    
+            } catch (SQLException ex) {
+                try {
+                    
+                    this.cn = DriverManager.getConnection(ConnectionBDD.DB_URL, ConnectionBDD.DB_USER, ConnectionBDD.DB_PASSWORD);
+                
+                } catch (SQLException ex1) {
+                    
+                    ex1.printStackTrace();
+                    return false;
+                
+                }
+            
+            }
+        
+        
         }
     
     return true;
+    }
+    
+    public Connection getConnectionManager(){
+    
+    return this.cn;
+    
     }
 }

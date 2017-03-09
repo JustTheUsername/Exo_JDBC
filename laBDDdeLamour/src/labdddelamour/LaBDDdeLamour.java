@@ -22,6 +22,7 @@ public class LaBDDdeLamour {
 
         ConnectionBDD test = ConnectionBDD.getInstance();
         test.connect();
+        System.out.println(test.connect());
         
     }
     
