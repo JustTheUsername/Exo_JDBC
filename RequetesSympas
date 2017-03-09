@@ -13,3 +13,13 @@ SELECT eleves.nom, eleves.prenom,classes.nom AS classe FROM Eleves JOIN classes 
 ### compter le nombre d'eleve par matière###
 
 SELECT matieres.nom AS matiere, COUNT(*) AS nombre_eleves FROM matieres JOIN matiereseleves ON matieres.id=matiereseleves.idmatiere JOIN eleves ON matiereseleves.ideleves=eleves.id GROUP BY matieres.nom;
+
+
+### Afficher le nombre de terminal qui ont sport ###
+
+SELECT matieres.nom AS matiere,classes.nom as classe, COUNT(*) AS nombre_eleves 
+FROM matieres
+JOIN matiereseleves ON matieres.id =matiereseleves.idMatiere
+JOIN eleves ON matiereseleves.idEleves=eleves.id 
+JOIN classes ON eleves.classe=classes.id 
+WHERE matieres.nom="Sport" AND classes.nom = "terminale";
