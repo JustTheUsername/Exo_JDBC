@@ -1,0 +1,15 @@
+
+### Afficher le nom , le prenom et la classe des élèves ayant sport####
+
+
+SELECT eleves.nom, eleves.prenom,classes.nom AS classe FROM Eleves JOIN classes ON eleves.classe = classes.id JOIN matiereseleves ON eleves.id=MatieresEleves.idEleves JOIN matieres ON matiereseleves.idMatiere = matieres.id WHERE matieres.nom = "Sport";
+
+
+### Afficher le nombre d'élève par classe ####
+
+ SELECT classes.nom as classe, COUNT(*) AS nombre_d_eleves From classes join eleves ON classes.id = eleves.classe GROUP BY classes.nom;
+
+
+### compter le nombre d'eleve par matière###
+
+SELECT matieres.nom AS matiere, COUNT(*) AS nombre_eleves FROM matieres JOIN matiereseleves ON matieres.id=matiereseleves.idmatiere JOIN eleves ON matiereseleves.ideleves=eleves.id GROUP BY matieres.nom;
