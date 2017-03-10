@@ -16,19 +16,42 @@ import java.util.logging.Logger;
  * @author Formation
  */
 public class EleveDAO extends DAO{
-    
+    boolean succed = false;
     public EleveDAO() {
         super();
     }
     
     @Override
     public boolean creer(Object obj) {
-        return false;
+        Eleve el =(Eleve) obj;
+        
+        if (this.bddmanager.connect()){
+        
+            try {
+               
+                Statement st = this.bddmanager.getConnectionManager().createStatement();
+                String requete = "INSERT INTO eleves (nom,prenom,classe)VALUES "
+                        + "(\""+ el.getNom()+"\",\" "+el.getPrenom()+"\","+el.getClasse()+")";
+                int resultat = st.executeUpdate(requete);
+                if (resultat != 0)
+                {
+                    succed = true;
+                }
+            
+            
+            } catch (SQLException ex) {
+                Logger.getLogger(EleveDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
+        }
+        
+        return succed;
     }
 
     @Override
     public boolean supprimer(Object obj) {
-        return false;
+        return succed;
     }
 
     @Override

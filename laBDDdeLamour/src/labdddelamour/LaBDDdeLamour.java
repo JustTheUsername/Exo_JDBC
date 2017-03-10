@@ -50,6 +50,14 @@ public class LaBDDdeLamour {
         }*/
 
         EleveDAO elDAO = new EleveDAO();
+        
+        Eleve patrick = new Eleve(0,"Patrick","PDA",4);
+        
+        boolean result = elDAO.creer(patrick);
+        
+        System.out.println(result);
+        System.out.println();       
+        
         ArrayList<Eleve> listeEleves = elDAO.getAll();
         
         System.out.println("il y a "+listeEleves.size()+" élèves dans cette école.");
