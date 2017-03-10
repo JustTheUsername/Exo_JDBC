@@ -6,6 +6,7 @@
 package labdddelamour;
 
 import bddsql.ConnectionBDD;
+import dao.EleveDAO;
 import datasave.Eleve;
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class LaBDDdeLamour {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
+/*
      ConnectionBDD maBDD = ConnectionBDD.getInstance();
      boolean testConnection = maBDD.connect();
      ArrayList<Eleve> listeEleve = new ArrayList <>();
@@ -46,8 +47,18 @@ public class LaBDDdeLamour {
             
         } catch (SQLException ex) {
             ex.printStackTrace();
-        }
+        }*/
+
+        EleveDAO elDAO = new EleveDAO();
+        ArrayList<Eleve> listeEleves = elDAO.getAll();
         
+        System.out.println("il y a "+listeEleves.size()+" élèves dans cette école.");
+        System.out.println();
+        
+        for (Eleve el : listeEleves){
+        
+            System.out.println("N° "+ el.getId() + " --> "+el.getPrenom() + "  "+el.getNom());
+        }
     }
     
 }
